@@ -8,6 +8,7 @@ const consumeCollection = async (collection) => {
     let data = [];
 
     querySnapshot.forEach((doc) => {
+        console.log(doc.id);
         data.push(doc.data())
     });
     if (data.length > 0) {

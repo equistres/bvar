@@ -22,20 +22,22 @@ export default class AdminComponent extends Component {
 
     getMembers = async () => {
         if (localStorage.getItem("users") === null) {
-            
+
             this.setState({
                 users: await Database("villanos"),
                 fetched: true
             })
             consoleLogHelper("red", "Dato obtenido de Firestore")
         } else {
-            
+
             this.setState({
                 users: JSON.parse(localStorage.getItem("users")),
                 fetched: true
             })
             consoleLogHelper("green", "Dato obtenido de localStorage")
         }
+        document.getElementsByClassName("alert-success")[0].classList.add('d-none');
+        document.getElementsByClassName("alert-danger")[0].classList.add('d-none');
     }
 
     isAdminCheck = async (email) => {
@@ -56,6 +58,8 @@ export default class AdminComponent extends Component {
         const response = await deleteUser(e.target.parentElement.id)
         if (response) {
             localStorage.removeItem("users")
+            document.getElementsByClassName("alert-danger")[0].innerHTML = "Se elimino correctamente";
+            document.getElementsByClassName("alert-danger")[0].classList.remove('d-none');
             this.getMembers();
 
         } else {
@@ -64,9 +68,6 @@ export default class AdminComponent extends Component {
     }
 
     addHandler = async () => {
-
-        
-
         let nombre = document.getElementById("instagram").value;
 
         let info = [];
@@ -89,6 +90,9 @@ export default class AdminComponent extends Component {
                 photo: json.profile_pic_url,
                 fullName: json.full_name
             }
+            document.getElementById("instagram").value = "";
+            document.getElementsByClassName("alert-success")[0].innerHTML = "Se agrego correctamente";
+            document.getElementsByClassName("alert-success")[0].classList.remove('d-none');
             const response = await addUser(profile)
             if (response) {
                 localStorage.removeItem("users")
@@ -98,6 +102,10 @@ export default class AdminComponent extends Component {
                 console.log("error al agregar documento");
             }
         }
+    }
+
+    logoutHandler = () => {
+        auth.auth().signOut();
     }
 
     render() {
@@ -117,16 +125,17 @@ export default class AdminComponent extends Component {
                         if (fetched) {
                             contenido = <MemberListComponent data={users} deleteHandler={this.deleteHandler} />
                         }
-                        if(contenido!==null){
-                            if(contenido.props.data.length===0){
+                        if (contenido !== null) {
+                            if (contenido.props.data.length === 0) {
                                 contenido = null;
                             }
                         }
-
                         return (
                             <div className="App">
                                 <h2>↳{this.props.location.pathname}</h2>
-                                <AddMember addHandler={this.addHandler} />
+                                <div className="alert alert-success d-none" role="alert" />
+                                <div className="alert alert-danger d-none" role="alert" />
+                                <AddMember addHandler={this.addHandler} logoutHandler={this.logoutHandler} />
                                 {contenido}
                             </div>
                         );

@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function MemberListComponent(props) {
     const { data, deleteHandler } = props;
-    console.log("MemberListComponent", props)
     let userRow = null;
     userRow = Object.keys(data).map((item, key) => {
         return (

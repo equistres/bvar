@@ -59,13 +59,21 @@ button~button {
 @media (max-width: 768px) {
   .add {
     text-indent: -9999px;
-    line-height: 0; /* Collapse the original line */
+    line-height: 0;
   }
-  
   .add::after {
     content: "Instagram";
     text-indent: 0;
     display: block;
-    line-height: initial; /* New content takes up original line height */
+    line-height: initial;
+  }
+  .display-2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .display-2 {
+    font-size: 1.5rem;
   }
 }
