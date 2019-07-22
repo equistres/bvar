@@ -2,16 +2,14 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Layout from '../Layout';
 import Home from '../Home';
-import Members from '../pages/members';
+import Members from '../pages/members/container';
 import Page404 from './404';
-import Admin from '../pages/admin';
-
-
+import Admin from '../pages/admin/container';
 
 export default () =>
     <BrowserRouter>
         <Layout>
-            <Switch> 
+            <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/members" component={Members} />
                 <Route exact path="/admin" component={Admin} />
@@ -19,3 +17,4 @@ export default () =>
             </Switch>
         </Layout>
     </BrowserRouter>
+
