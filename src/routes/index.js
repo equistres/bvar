@@ -5,16 +5,19 @@ import Home from '../Home';
 import Members from '../pages/members/container';
 import Page404 from './404';
 import Admin from '../pages/admin/container';
+import { StoreProvider } from '../helpers/context';
 
 export default () =>
     <BrowserRouter>
-        <Layout>
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/members" component={Members} />
-                <Route exact path="/admin" component={Admin} />
-                <Route component={Page404} />
-            </Switch>
-        </Layout>
+        <StoreProvider>
+            <Layout>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/members" component={Members} />
+                    <Route exact path="/admin" component={Admin} />
+                    <Route component={Page404} />
+                </Switch>
+            </Layout>
+        </StoreProvider>
     </BrowserRouter>
 

@@ -1,8 +1,26 @@
 
 import React from 'react';
 
-export const Store = React.createContext();
 
-export function StoreProvider(props) {
-  return <Store.Provider value={{value1:1, value2:2}}>{props.children}</Store.Provider>;
+
+const initialValue = {
+    users: null
+};
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'ADD':
+            return { ...state, users: action.payload };
+        default:
+            return state;
+    }
+}
+
+export const Store = React.createContext();
+export const StoreProvider = (props) => {
+    const [state, dispatch] = React.useReducer(reducer, initialValue);
+
+    const value = { state, dispatch };
+
+    return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }
