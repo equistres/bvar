@@ -1,14 +1,18 @@
 
 import React, { useEffect, useReducer } from 'react';
-
-import Database from '../helpers/db';
-import consoleLogHelper from '../helpers/console';
+import firebase from 'firebase/app';
+import Database, { consumeDocuments } from './db';
+import consoleLogHelper from './console';
 
 
 function reducer(state, action) {
+    console.log("TCL: reducer -> state", state)
+    console.log("TCL: reducer -> action", action)
     switch (action.type) {
-        case 'ADD':
+        case 'ADDUSERS':
             return { ...state, users: action.payload };
+        case 'ADDADMIN':
+            return { ...state, admin: action.payload };
         default:
             return state;
     }
@@ -23,11 +27,17 @@ const getMembers = async () => {
         response = await Database("villanos")
         consoleLogHelper("red", "Dato obtenido de Firestore")
         return response;
-
     } else {
         response = JSON.parse(localStorage.getItem("users"))
         consoleLogHelper("green", "Dato obtenido de localStorage")
         return response;
+    }
+}
+
+const isAdminCheck = async () => {
+    let doc = await consumeDocuments("roles", "admin");
+    if (doc.exists) {
+        return doc.data().email;
     }
 }
 
@@ -38,9 +48,27 @@ export const StoreProvider = (props) => {
     useEffect(() => {
         getMembers().then(response => {
             dispatch({
-                type: 'ADD',
+                type: 'ADDUSERS',
                 payload: response
             })
+        })
+        isAdminCheck().then(response => {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    if (user.email === response) {
+                        dispatch({
+                            type: 'ADDADMIN',
+                            payload: true
+                        })
+                    }
+                } else {
+                    dispatch({
+                        type: 'ADDADMIN',
+                        payload: false
+                    })
+                }
+
+            });
         })
     }, [])
 
