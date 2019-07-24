@@ -18,7 +18,7 @@ export default class Layout extends Component {
                 {/* Cuerpo */}
                 <div className="container">
                     <div>
-                        <h1 className="display-2 text-center">Bearded Villains Argentina</h1>
+                        {/* <h1 className="display-2 text-center">Bearded Villains Argentina</h1> */}
                     </div>
                     {/* Menu */}
                     <nav id='cssmenu'>

@@ -1,20 +1,6 @@
-import React, { useContext } from 'react'
-import { Store } from './helpers/context';
-
+import React from 'react'
 
 export default function Home(props) {
-
-  const { state, dispatch } = useContext(Store);
-
-  function buttonTest(e) {
-    console.log("CLICK BOTON");
-
-    dispatch({
-      type:"ADD",
-      payload: "usuarioLoco",
-    })
-  }
-
   return (
     <div className="App text-center">
       {/* <blockquote className="blockquote">
@@ -26,7 +12,6 @@ export default function Home(props) {
         <br />• Respeto
         <br />• Lealtad
         </blockquote> */}
-      <button onClick={buttonTest}>botonazo</button>
     </div >
   )
 }
