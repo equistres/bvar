@@ -5,22 +5,10 @@ import Database, { consumeDocuments } from './db';
 import consoleLogHelper from './console';
 
 
-function reducer(state, action) {
-    console.log("TCL: reducer -> state", state)
-    console.log("TCL: reducer -> action", action)
-    switch (action.type) {
-        case 'ADDUSERS':
-            return { ...state, users: action.payload };
-        case 'ADDADMIN':
-            return { ...state, admin: action.payload };
-        default:
-            return state;
-    }
-}
 
 export const Store = React.createContext();
 
-const getMembers = async () => {
+export const getMembers = async () => {
     let response;
 
     if (localStorage.getItem("users") === null) {
@@ -41,6 +29,22 @@ const isAdminCheck = async () => {
     }
 }
 
+function reducer(state, action) {
+    console.log("TCL: reducer -> state", state)
+    console.log("TCL: reducer -> action", action)
+    switch (action.type) {
+        case 'ADDUSERS':
+            return { ...state, users: action.payload };
+        case 'ADDADMIN':
+            return { ...state, admin: action.payload };
+        case 'RELOADUSERS':
+            return { ...state, users: getMembers() };
+        default:
+            return state;
+    }
+}
+
+
 
 export const StoreProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, null)
@@ -54,13 +58,11 @@ export const StoreProvider = (props) => {
         })
         isAdminCheck().then(response => {
             firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    if (user.email === response) {
-                        dispatch({
-                            type: 'ADDADMIN',
-                            payload: true
-                        })
-                    }
+                if (user && user.email && user.email === response) {
+                    dispatch({
+                        type: 'ADDADMIN',
+                        payload: true
+                    })
                 } else {
                     dispatch({
                         type: 'ADDADMIN',

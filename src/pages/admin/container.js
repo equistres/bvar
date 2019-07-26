@@ -5,11 +5,11 @@ import auth from '../../helpers/auth';
 import MemberListComponent from './component';
 import { deleteUser, addUser } from '../../helpers/db';
 import AddMember from './addmember';
-import { Store } from '../../helpers/context';
+import { Store, getMembers } from '../../helpers/context';
 
 export default function AdminComponent(props) {
 
-    const { state } = useContext(Store);
+    const { state, dispatch } = useContext(Store);
 
     const getInfoFromInstagram = (item) => {
         return axios.get(`https://instagram.com/${item}`)
@@ -22,8 +22,12 @@ export default function AdminComponent(props) {
             localStorage.removeItem("users")
             document.getElementsByClassName("alert-danger")[0].innerHTML = "Se elimino correctamente";
             document.getElementsByClassName("alert-danger")[0].classList.remove('d-none');
-            //getMembers();
-
+            const newList = await getMembers();
+            dispatch({
+                type: 'ADDUSERS',
+                payload: newList
+            })
+            document.getElementsByClassName("alert-danger")[0].classList.add('d-none');
         } else {
             console.log("error al agregar documento");
         }
@@ -58,7 +62,12 @@ export default function AdminComponent(props) {
             const response = await addUser(profile)
             if (response) {
                 localStorage.removeItem("users")
-                //this.getMembers();
+                const newList = await getMembers();
+                dispatch({
+                    type: 'ADDUSERS',
+                    payload: newList
+                })
+                document.getElementsByClassName("alert-success")[0].classList.add('d-none');
 
             } else {
                 console.log("error al agregar documento");
