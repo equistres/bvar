@@ -8,11 +8,10 @@ import Admin from '../pages/admin/container';
 import { StoreProvider } from '../helpers/context';
 
 export default () => (
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
     <StoreProvider>
       <Layout>
         <Switch>
-          <Route exact path="/bvar" component={Home} />
           <Route exact path="/" component={Home} />
           <Route exact path="/members" component={Members} />
           <Route exact path="/admin" component={Admin} />
