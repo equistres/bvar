@@ -7,17 +7,18 @@ import Page404 from './404';
 import Admin from '../pages/admin/container';
 import { StoreProvider } from '../helpers/context';
 
-export default () =>
-    <BrowserRouter>
-        <StoreProvider>
-            <Layout>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/members" component={Members} />
-                    <Route exact path="/admin" component={Admin} />
-                    <Route component={Page404} />
-                </Switch>
-            </Layout>
-        </StoreProvider>
-    </BrowserRouter>
-
+export default () => (
+  <BrowserRouter>
+    <StoreProvider>
+      <Layout>
+        <Switch>
+          <Route exact path="/bvar" component={Home} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/members" component={Members} />
+          <Route exact path="/admin" component={Admin} />
+          <Route component={Page404} />
+        </Switch>
+      </Layout>
+    </StoreProvider>
+  </BrowserRouter>
+);
