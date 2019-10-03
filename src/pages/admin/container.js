@@ -35,7 +35,7 @@ export default function AdminComponent(props) {
 
     const addHandler = async () => {
         let nombre = document.getElementById("instagram").value;
-
+        let staff = document.getElementById("staff").checked;
         let info = [];
 
         info = await getInfoFromInstagram(nombre);
@@ -54,7 +54,8 @@ export default function AdminComponent(props) {
             const profile = {
                 userName: json.username,
                 photo: json.profile_pic_url,
-                fullName: json.full_name
+                fullName: json.full_name,
+                staff: staff
             }
             document.getElementById("instagram").value = "";
             document.getElementsByClassName("alert-success")[0].innerHTML = "Se agrego correctamente";

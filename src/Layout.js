@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './Layout.css';
-import BVAR from '../bvar.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Layout.css";
+import BVAR from "../bvar.png";
 
-export default class Layout extends Component {
+const Layout =(props)=> {
   //funcion que setea la solapa activa
-  activeMenuHandler = e => {
+  const activeMenuHandler = e => {
     let id = e.target.parentElement.id;
-    let element = document.getElementsByClassName('active');
-    element[0].classList.remove('active');
+    let element = document.getElementsByClassName("active");
+    element[0].classList.remove("active");
     let newElement = document.getElementById(id);
-    newElement.classList.add('active');
+    newElement.classList.add("active");
   };
 
-  render() {
     return (
       <div>
         {/* Cuerpo */}
@@ -34,36 +33,41 @@ export default class Layout extends Component {
           <nav id="cssmenu">
             <ul>
               <li id="home" className="active">
-                <Link to="/" onClick={this.activeMenuHandler}>
+                <Link to="/" onClick={activeMenuHandler}>
                   Home
                 </Link>
               </li>
               <li id="members">
-                <Link to="/members" onClick={this.activeMenuHandler}>
+                <Link to="/members" onClick={activeMenuHandler}>
                   Members
                 </Link>
               </li>
-              {/* <li id="rules"><Link to="/rules" onClick={this.activeMenuHandler}>Rules</Link></li>
-                            <li id="themes"><Link to="/themes" onClick={this.activeMenuHandler}>BV Themes</Link></li> */}
+              <li id="rules">
+                <Link to="/rules" onClick={activeMenuHandler}>
+                  Rules
+                </Link>
+              </li>
+              <li id="themes">
+                <Link to="/themes" onClick={activeMenuHandler}>
+                  BV Themes
+                </Link>
+              </li>
               <li id="admin">
-                <Link to="/admin" onClick={this.activeMenuHandler}>
+                <Link to="/admin" onClick={activeMenuHandler}>
                   Admin
                 </Link>
               </li>
             </ul>
           </nav>
-          {this.props.children}
+          {props.children}
           {/* Footer */}
-          <footer
-            id="sticky-footer"
-            className="py-4 bg-dark text-white-50 rounded"
-          >
+          <footer id="sticky-footer" className="py-4 bg-dark text-white-50 rounded">
             <div className="container text-center">
-              {/* <span>BeardedVillains Argentina 2019</span> | <span><a href="https://www.instagram.com/medieval.bearded" target="_blank">Webmaster</a> </span> */}
+              <span><a href="https://www.instagram.com/beardedvillainsargentina" target="_blank">BeardedVillains Argentina 2019</a></span> | <span><a href="https://www.instagram.com/medieval.bearded" target="_blank">Webmaster</a> </span>
             </div>
           </footer>
         </div>
       </div>
     );
-  }
 }
+export default Layout;

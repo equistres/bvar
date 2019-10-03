@@ -1,6 +1,5 @@
 {
   "name": "beardedvillains",
-  "homepage": "http://equistres.github.io/bvar",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,20 +14,9 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "0.9.5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "devDependencies": {
     "gh-pages": "^2.1.1",
-    "webpack-dev-server": "^3.7.2"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+    "webpack-dev-server": "3.0.0"
   },
   "scripts": {
     "start": "react-scripts start --watch-poll",

@@ -5,6 +5,7 @@ import Home from '../Home';
 import Members from '../pages/members/container';
 import Page404 from './404';
 import Admin from '../pages/admin/container';
+import Themes from '../pages/themes/container';
 import { StoreProvider } from '../helpers/context';
 
 export default () => (
@@ -15,6 +16,7 @@ export default () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/members" component={Members} />
           <Route exact path="/admin" component={Admin} />
+          <Route exact path="/themes" component={Themes} />
           <Route component={Page404} />
         </Switch>
       </Layout>
