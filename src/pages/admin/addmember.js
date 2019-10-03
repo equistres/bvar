@@ -12,9 +12,9 @@ export default function Addmember(props) {
                 </div>
                 <div className="form-check rango">
                     <input type="checkbox" className="form-check-input" id="staff"/>
-                    <label className="form-check-label" htmlFor="rango">Rango</label>
+                    <label className="form-check-label" htmlFor="rango">Oficial</label>
                 </div>       
-                <a className="btn btn-primary mb-2" onClick={addHandler}>Agregar</a>
+                <a className="btn btn-primary mb-2" onClick={addHandler}>Agregar Miembro</a>
             </form>
 
         </div>

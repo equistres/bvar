@@ -22,6 +22,20 @@ export const getMembers = async () => {
     }
 }
 
+export const getThemes = async () => {
+    let response;
+
+    if (localStorage.getItem("themes") === null) {
+        response = await Database("themes")
+        consoleLogHelper("red", "Dato obtenido de Firestore")
+        return response;
+    } else {
+        response = JSON.parse(localStorage.getItem("themes"))
+        consoleLogHelper("green", "Dato obtenido de localStorage")
+        return response;
+    }
+}
+
 const isAdminCheck = async () => {
     let doc = await consumeDocuments("roles", "admin");
     if (doc.exists) {
@@ -37,14 +51,14 @@ function reducer(state, action) {
             return { ...state, users: action.payload };
         case 'ADDADMIN':
             return { ...state, admin: action.payload };
+        case 'ADDTHEMES':
+            return { ...state, themes: action.payload };
         case 'RELOADUSERS':
             return { ...state, users: getMembers() };
         default:
             return state;
     }
 }
-
-
 
 export const StoreProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, null)
@@ -53,6 +67,12 @@ export const StoreProvider = (props) => {
         getMembers().then(response => {
             dispatch({
                 type: 'ADDUSERS',
+                payload: response
+            })
+        })
+        getThemes().then(response => {
+            dispatch({
+                type: 'ADDTHEMES',
                 payload: response
             })
         })
@@ -72,6 +92,7 @@ export const StoreProvider = (props) => {
 
             });
         })
+
     }, [])
 
     const value = { state, dispatch };

@@ -3,9 +3,10 @@ import firebase from 'firebase/app';
 import axios from 'axios'
 import auth from '../../helpers/auth';
 import MemberListComponent from './component';
-import { deleteUser, addUser } from '../../helpers/db';
+import { deleteUser, addUser, addTheme } from '../../helpers/db';
 import AddMember from './addmember';
-import { Store, getMembers } from '../../helpers/context';
+import AddTheme from './addtheme';
+import { Store, getDocs } from '../../helpers/context';
 
 export default function AdminComponent(props) {
 
@@ -22,7 +23,7 @@ export default function AdminComponent(props) {
             localStorage.removeItem("users")
             document.getElementsByClassName("alert-danger")[0].innerHTML = "Se elimino correctamente";
             document.getElementsByClassName("alert-danger")[0].classList.remove('d-none');
-            const newList = await getMembers();
+            const newList = await getDocs("villanos");
             dispatch({
                 type: 'ADDUSERS',
                 payload: newList
@@ -63,7 +64,7 @@ export default function AdminComponent(props) {
             const response = await addUser(profile)
             if (response) {
                 localStorage.removeItem("users")
-                const newList = await getMembers();
+                const newList = await getDocs("villanos");
                 dispatch({
                     type: 'ADDUSERS',
                     payload: newList
@@ -80,6 +81,22 @@ export default function AdminComponent(props) {
         auth.auth().signOut();
     }
 
+    const addThemeHandler = async (e) =>{
+        const text = e.target.parentElement.getElementsByTagName("textarea")[0].value;
+        const theme = {
+            description: text.replace(/[^a-zA-Z ]/g, "").slice(0,30),
+            text: text
+        }
+        const response = await addTheme(theme);
+        if (response){
+            document.getElementsByClassName("alert-success theme")[0].innerHTML = "Se agrego correctamente";
+            document.getElementsByClassName("alert-success theme")[0].classList.remove('d-none');
+            setTimeout(()=>{
+                document.getElementsByClassName("alert-success theme")[0].classList.add('d-none');
+            },3000)
+        }  
+    }
+
     let contenido = null;
     let users = null;
     if (state) {
@@ -89,9 +106,13 @@ export default function AdminComponent(props) {
                 <React.Fragment>
                     <h2>↳{props.location.pathname}</h2>
                     <div className="alert alert-success d-none" role="alert" />
-                    <div className="alert alert-danger d-none" role="alert" />
+                    <div className="alert alert-danger d-none" role="alert" />                    
                     <AddMember addHandler={addHandler} logoutHandler={logoutHandler} />
                     <MemberListComponent data={users} deleteHandler={deleteHandler} />
+                    <div className="alert alert-success d-none theme" role="alert" />
+                    <div className="alert alert-danger d-none theme" role="alert" />   
+                    <h2>Themes</h2>
+                    <AddTheme addThemeHandler={addThemeHandler} />
                 </React.Fragment>
         } else {
             contenido =

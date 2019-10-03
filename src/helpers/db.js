@@ -11,7 +11,12 @@ const consumeCollection = async (collection) => {
         data.push(doc.data())
     });
     if (data.length > 0) {
-        localStorage.setItem("users", JSON.stringify(data));
+        if(collection==="villanos"){
+            localStorage.setItem("users", JSON.stringify(data));
+        }
+        if(collection==="themes"){
+            localStorage.setItem("themes", JSON.stringify(data));
+        }
     }
     return data;
 }
