@@ -1,9 +1,9 @@
 import React from "react";
 
-const Copy = (e) => {
-    const id= e.target.id;
-    debugger;
-  let textarea = document.getElementById("textarea"+id);
+const Copy = e => {
+  const id = e.target.id;
+  debugger;
+  let textarea = document.getElementById("textarea" + id);
   textarea.select();
   document.execCommand("copy");
 };
@@ -11,10 +11,11 @@ const Copy = (e) => {
 const ThemeComponent = props => {
   const { data, id } = props;
   return (
-    <div>
-      <textarea id={"textarea"+id} defaultValue={data.text}/>
-      <button onClick={Copy} id={id}>Copiar</button>
+    <div className="d-flex justify-content-center">        
+      <textarea style={{width: 400}}className="rounded-0" id={"textarea"+id} rows="5" defaultValue={data.text}/>
+      <button onClick={Copy} id={id}>Copiar</button>        
     </div>
+    
   );
 };
 export default ThemeComponent;
