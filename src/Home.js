@@ -4,7 +4,7 @@ export default function Home(props) {
 
   return (
     <div className="App text-center">
-      {/* <blockquote className="blockquote">
+      <blockquote className="blockquote">
         Somos una hermandad de hombres barbudos de élite de todo el mundo,
         dedicada a:
         <br />• La Barba
@@ -12,7 +12,7 @@ export default function Home(props) {
         <br />• Familia
         <br />• Respeto
         <br />• Lealtad
-        </blockquote> */}
+        </blockquote> 
     </div >
   )
 }

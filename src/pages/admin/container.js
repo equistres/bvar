@@ -83,6 +83,7 @@ export default function AdminComponent(props) {
 
     const addThemeHandler = async (e) =>{
         const text = e.target.parentElement.getElementsByTagName("textarea")[0].value;
+        debugger;
         const theme = {
             description: text.replace(/[^a-zA-Z ]/g, "").slice(0,30),
             text: text

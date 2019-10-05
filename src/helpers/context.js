@@ -2,7 +2,7 @@
 import React, { useEffect, useReducer } from 'react';
 import firebase from 'firebase/app';
 import Database, { consumeDocuments } from './db';
-import consoleLogHelper from './console';
+//import consoleLogHelper from './console';
 
 
 
@@ -11,29 +11,29 @@ export const Store = React.createContext();
 export const getMembers = async () => {
     let response;
 
-    if (localStorage.getItem("users") === null) {
-        response = await Database("villanos")
-        consoleLogHelper("red", "Dato obtenido de Firestore")
-        return response;
-    } else {
-        response = JSON.parse(localStorage.getItem("users"))
-        consoleLogHelper("green", "Dato obtenido de localStorage")
-        return response;
-    }
+    // if (localStorage.getItem("users") === null) {
+         response = await Database("villanos")
+    //     consoleLogHelper("red", "Dato obtenido de Firestore")
+         return response;
+    // } else {
+    //     response = JSON.parse(localStorage.getItem("users"))
+    //     consoleLogHelper("green", "Dato obtenido de localStorage")
+    //     return response;
+    // }
 }
 
 export const getThemes = async () => {
     let response;
 
-    if (localStorage.getItem("themes") === null) {
+    //if (localStorage.getItem("themes") === null) {
         response = await Database("themes")
-        consoleLogHelper("red", "Dato obtenido de Firestore")
+      //  consoleLogHelper("red", "Dato obtenido de Firestore")
         return response;
-    } else {
-        response = JSON.parse(localStorage.getItem("themes"))
-        consoleLogHelper("green", "Dato obtenido de localStorage")
-        return response;
-    }
+    //} else {
+       // response = JSON.parse(localStorage.getItem("themes"))
+        //consoleLogHelper("green", "Dato obtenido de localStorage")
+        //return response;
+    //}
 }
 
 const isAdminCheck = async () => {

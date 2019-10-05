@@ -52,5 +52,19 @@ const deleteUser = async (user) => {
     return response;
 }
 
+const addTheme = async (theme) => {
+    let response;
+
+    try {
+        await db.collection("themes").doc(theme.description).set(theme)
+        response = true
+    } catch (error) {
+        console.log(error)
+        response = false
+    }
+    return response;
+}
+
+
 export default consumeCollection;
-export { consumeDocuments, addUser, deleteUser };
+export { consumeDocuments, addUser, deleteUser, addTheme };
