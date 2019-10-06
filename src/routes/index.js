@@ -18,7 +18,7 @@ export default () => (
           <Route exact path="/members" component={Members} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/themes" component={Themes} />
-          <Route exact path="/rules" component={Rules} />
+          <Route exact path="/info" component={Rules} />
           <Route component={Page404} />
         </Switch>
       </Layout>

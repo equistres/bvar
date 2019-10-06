@@ -16,6 +16,7 @@ export default function Addmember(props) {
                 </div>       
                 <a className="btn btn-primary mb-2" onClick={addHandler}>Agregar Miembro</a>
             </form>
+            
 
         </div>
     )

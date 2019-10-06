@@ -43,8 +43,8 @@ const Layout =(props)=> {
                 </Link>
               </li>
               <li id="rules">
-                <Link to="/rules" onClick={activeMenuHandler}>
-                  Rules
+                <Link to="/info" onClick={activeMenuHandler}>
+                  Info
                 </Link>
               </li>
               <li id="themes">
