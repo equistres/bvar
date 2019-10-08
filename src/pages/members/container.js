@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../../index.css";
 import MemberComponent from "./component";
 import { Store } from "../../helpers/context";
+import _ from "lodash";
 
 //SI RECIBE PROPS COMO PARAMETRO TENGO TODOS LOS DATOS DEL DOM
 export default function MemberContainer(props) {
@@ -13,11 +14,13 @@ export default function MemberContainer(props) {
 
   if (state) {
     const users = state.users;
-    Object.keys(users).map((item, key) => {
-      if (users[item].staff) {
-        return staff.push(<MemberComponent key={key} data={users[item]} />);
+    var sortedList = _.sortBy(users, ["rango"]);
+
+    sortedList.forEach(function(element, key) {
+      if (element.staff) {
+        return staff.push(<MemberComponent key={key} data={element} />);
       } else {
-        return members.push(<MemberComponent key={key} data={users[item]} />);
+        return members.push(<MemberComponent key={key} data={element} />);
       }
     });
   } else {
@@ -30,7 +33,11 @@ export default function MemberContainer(props) {
 
       <div className="container mt-4">
         <h3>Oficiales</h3>
-        <div className="row" style={{ justifyContent: "center" }}>
+        <div
+          className="row"
+          style={{ justifyContent: "center" }}
+          id="oficiales"
+        >
           {contenido}
           {staff}
         </div>
