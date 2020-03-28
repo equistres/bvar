@@ -16,7 +16,6 @@ export default function AdminComponent(props) {
         return axios.get(`https://instagram.com/${item}`)
     }
 
-
     const deleteHandler = async (e) => {
         const response = await deleteUser(e.target.parentElement.id)
         if (response) {
@@ -34,9 +33,11 @@ export default function AdminComponent(props) {
         }
     }
 
-    const addHandler = async () => {
-        let nombre = document.getElementById("instagram").value;
-        let staff = document.getElementById("staff").checked;
+    const addHandler = async (ig, oficial, orden) => {
+        let nombre = typeof ig !== 'object' ? ig : document.getElementById("instagram").value;
+        let staff = oficial ? oficial : document.getElementById("staff").checked;
+        let rango = orden ? orden : document.getElementById("rango").value;
+        debugger;
         let info = [];
 
         info = await getInfoFromInstagram(nombre);
@@ -56,7 +57,8 @@ export default function AdminComponent(props) {
                 userName: json.username,
                 photo: json.profile_pic_url,
                 fullName: json.full_name,
-                staff: staff
+                staff: staff,
+                rango: rango
             }
             document.getElementById("instagram").value = "";
             document.getElementsByClassName("alert-success")[0].innerHTML = "Se agrego correctamente";
@@ -74,6 +76,17 @@ export default function AdminComponent(props) {
             } else {
                 console.log("error al agregar documento");
             }
+        }
+    }
+
+    const updateHandler = () =>{
+        const memberlist = document.getElementsByClassName("memberlist");
+        debugger;
+        for (let index = 0; index < memberlist.length; index++) {
+            const ig = memberlist[index].getAttribute("username");
+            const oficial = memberlist[index].getAttribute("staff");
+            const orden = memberlist[index].getAttribute("rango");
+            addHandler(ig,oficial,orden);
         }
     }
 
@@ -108,7 +121,7 @@ export default function AdminComponent(props) {
                     <h2>↳{props.location.pathname}</h2>
                     <div className="alert alert-success d-none" role="alert" />
                     <div className="alert alert-danger d-none" role="alert" />                    
-                    <AddMember addHandler={addHandler} logoutHandler={logoutHandler} />
+                    <AddMember addHandler={addHandler} logoutHandler={logoutHandler} updateHandler={updateHandler} />
                     <MemberListComponent data={users} deleteHandler={deleteHandler} />
                     <div className="alert alert-success d-none theme" role="alert" />
                     <div className="alert alert-danger d-none theme" role="alert" />   

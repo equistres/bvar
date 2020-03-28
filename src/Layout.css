@@ -139,3 +139,7 @@ body {
 .rango {
   margin-right: 10px;
 }
+
+.rango input[type="text"]{
+  width: 30px;
+}

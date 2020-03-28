@@ -52,11 +52,11 @@ const Layout =(props)=> {
                   BV Themes
                 </Link>
               </li>
-              <li id="admin">
+              {/* <li id="admin">
                 <Link to="/admin" onClick={activeMenuHandler}>
                   Admin
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
           {props.children}
