@@ -56,6 +56,22 @@ button~button {
   width: 150px;
 }
 
+hr {
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 8px auto;
+  height: 0;
+  width: 50%;
+  max-height: 0;
+  font-size: 1px;
+  line-height: 0;
+  clear: both;
+  border: none;
+  border-top: 1px solid #aaaaaa;
+  border-bottom: 1px solid #ffffff;
+}
+
 @media (max-width: 768px) {
   .add {
     text-indent: -9999px;
