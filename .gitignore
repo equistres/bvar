@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-
 # testing
 /coverage
 
@@ -24,3 +23,4 @@ firebase.json/
 .firebaserc
 .firebase.json
 .firebase/hosting.YnVpbGQ.cache
+package-lock.json
