@@ -42,11 +42,11 @@ const Layout =(props)=> {
                   Members
                 </Link>
               </li>
-              <li id="rules">
+              {/* <li id="rules">
                 <Link to="/info" onClick={activeMenuHandler}>
                   Info
                 </Link>
-              </li>
+              </li> */}
               <li id="themes">
                 <Link to="/themes" onClick={activeMenuHandler}>
                   BV Themes

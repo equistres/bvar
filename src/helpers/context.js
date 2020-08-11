@@ -44,8 +44,6 @@ const isAdminCheck = async () => {
 }
 
 function reducer(state, action) {
-    console.log("TCL: reducer -> state", state)
-    console.log("TCL: reducer -> action", action)
     switch (action.type) {
         case 'ADDUSERS':
             return { ...state, users: action.payload };

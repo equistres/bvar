@@ -9,6 +9,10 @@ body {
   color: #000;
 }
 
+p {
+  color: lightslategray;
+}
+
 .google-button {
   height: 40px;
   border-width: 0;

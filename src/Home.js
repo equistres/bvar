@@ -4,15 +4,20 @@ export default function Home(props) {
 
   return (
     <div className="App text-center">
-      <blockquote className="blockquote">
-        Somos una hermandad de hombres barbudos de élite de todo el mundo,
-        dedicada a:
-        <br />• La Barba
-        <br />• Caridad
-        <br />• Familia
-        <br />• Respeto
-        <br />• Lealtad
-        </blockquote>
+      <h3>¿Quienes Somos?</h3>
+        <p style={{textAlign: 'center'}}>
+          Somos una hermandad de hombres barbudos de élite de todo el mundo,
+          dedicada a:<br/>
+          <b>• La Barba • Caridad • Familia • Respeto • Lealtad</b>
+        </p>
+        <h3>Mision:</h3>
+        <p style={{textAlign: 'center'}}>
+          Unir hombres barbudos de todas las culturas, razas, credo y sexualidad en una Hermandad dedicada a la Lealtad, el Honor y el Respeto hacia todas las personas, Dedicada a la mejora de la humanidad a través de la fraternidad, Caridad y Bondad
+        </p>
+        Presidente - @Von_Knox
+        <br/>
+        <img src="https://i.ibb.co/c1Fqm6y/vonknox.jpg" width="200px" alt="von knox"/>
+
         <hr/>
         <div>
           <p>INSTAGRAM OFICIAL: <a href="https://instagr.am/mauro.ponti">@beardedvillainsargentina</a>🇦🇷</p>
